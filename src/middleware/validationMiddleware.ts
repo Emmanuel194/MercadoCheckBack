@@ -17,11 +17,15 @@ export const validateSignup = [
     .isEmpty()
     .withMessage("Senha é obrigatória"),
   check("confirmPassword")
+    .not()
+    .isEmpty()
+    .withMessage("Confirmação de senha é obrigatória")
     .custom((value, { req }) => value === req.body.password)
     .withMessage("As senhas não coincidem"),
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log("Erros de validação:", errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
     next();

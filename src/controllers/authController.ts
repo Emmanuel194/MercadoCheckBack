@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const register = async (req: Request, res: Response) => {
+  console.log("Recebendo dados para registro:", req.body);
   const { name, email, password, dob } = req.body;
 
   try {
@@ -17,6 +18,7 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: "Usuário registrado com sucesso" });
   } catch (err) {
+    console.error("Erro ao registrar usuário:", err);
     res.status(500).json({ message: "Erro ao registrar o usuário" });
   }
 };
