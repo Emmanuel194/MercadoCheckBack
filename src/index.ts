@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
-app.use(authenticateToken);
+// app.use(authenticateToken);
 app.use("/api", listRoutes);
 
 const PORT = process.env.PORT || 3000;
