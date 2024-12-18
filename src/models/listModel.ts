@@ -27,3 +27,23 @@ export const getUserLists = async (user_id: number): Promise<List[]> => {
   conn.release();
   return rows as List[];
 };
+
+export const updateList = async (id: number, name: string, items: string) => {
+  const conn = await pool.getConnection();
+  const [result] = await conn.query(
+    "UPDATE lists SET name = ?, items = ? WHERE id = ? AND is_active = TRUE",
+    [name, items, id]
+  );
+  conn.release();
+  return result;
+};
+
+export const inactivateList = async (id: number) => {
+  const conn = await pool.getConnection();
+  const [result] = await conn.query(
+    "UPDATE lists SET is_active = FALSE WHERE id = ?",
+    [id]
+  );
+  conn.release();
+  return result;
+};

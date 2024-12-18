@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { addList, fetchUserLists } from "../controllers/listController";
+import {
+  addList,
+  deleteList,
+  editList,
+  fetchUserLists,
+} from "../controllers/listController";
 import {
   validateListCreationChecks,
   validateListCreation,
@@ -17,5 +22,7 @@ router.post(
 );
 
 router.get("/lists", authenticateToken, fetchUserLists);
+router.put("/lists", authenticateToken, editList);
+router.delete("/lists/:id", authenticateToken, deleteList);
 
 export default router;

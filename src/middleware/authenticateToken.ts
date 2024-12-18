@@ -21,9 +21,12 @@ export const authenticateToken = (
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
+    const decoded = jwt.verify(token, JWT_SECRET) as {
+      id: number;
+      userId: number;
+    };
     console.log("Decoded token:", decoded);
-    req.user = { userId: decoded.userId };
+    req.user = { userId: decoded.id };
     next();
   } catch (err) {
     res.status(403).json({ message: "Token inválido" });
