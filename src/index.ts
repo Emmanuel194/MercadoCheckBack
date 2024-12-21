@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes";
 import listRoutes from "./routes/listRoutes";
+import priceRoutes from "./routes/princeRoutes";
 import dotenv from "dotenv";
 import axios from "axios";
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
 app.use("/api", listRoutes);
+app.use("/api/prices", priceRoutes);
 
 const apiKey = process.env.GOOGLE_API_KEY;
 
